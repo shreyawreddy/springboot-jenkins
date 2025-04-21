@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven'
+        jdk 'JDK 21'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building Spring Boot WAR...'
+                dir('C:\\Users\\shrey\\Downloads\\springboot-jenkins-demo') {
+                    bat 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+               echo 'Deploying to Tomcat...'
+               bat '''
+               copy "C:\\Users\\shrey\\Downloads\\springboot-jenkins-demo\\target\\springboot-jenkins-demo-0.0.1-SNAPSHOT.war" "C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps\\springboot-jenkins-demo.war"
+               '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Something went wrong'
+        }
+    }
+}

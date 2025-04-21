@@ -1,0 +1,11 @@
+Java : vesion 21
+Tomcat version : 9.0
+Maven : 3.9
+
+Ports:
+Tomcat : 8081
+Jenkins : 8080
+
+
+
+
